@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/gradle/common.gradle"
+
+dependencies {
+    implementation "io.coil-kt:coil:$coilVersion"
+    implementation "io.coil-kt:coil-svg:$coilSvgVersion"
+}

@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+apply from: "$rootDir/gradle/common.gradle"
+apply from: "$rootDir/gradle/dagger.gradle"
+
+android {
+    defaultConfig {
+        applicationId "${appId}.resume"
+    }
+}
+
+dependencies {
+    implementation project(":data")
+    implementation project(":domain")
+    implementation project(":features:imageloader")
+    implementation project(":features:coroutines")
+
+    implementation "androidx.constraintlayout:constraintlayout:$androidxConstraintLayoutVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayoutVersion"
+    implementation "com.google.android.material:material:$designMaterialVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+}

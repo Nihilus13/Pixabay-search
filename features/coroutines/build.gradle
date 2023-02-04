@@ -1,0 +1,13 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/gradle/common.gradle"
+
+dependencies {
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$ktxLifecycleVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinTestCoroutineVersion"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutineVersion"
+    testImplementation "androidx.lifecycle:lifecycle-runtime-ktx:$ktxLifecycleVersion"
+}

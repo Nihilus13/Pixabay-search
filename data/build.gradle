@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/gradle/common.gradle"
+
+android {
+    defaultConfig {
+        buildConfigField("String", "API_URL", "\"https://pixabay.com/api/\"")
+    }
+}
+
+dependencies {
+    implementation project(":domain")
+    implementation project(":features:coroutines")
+}

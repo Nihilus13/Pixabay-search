@@ -1,0 +1,16 @@
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+apply from: "$rootDir/gradle/dependencies.gradle"
+
+detekt {
+    toolVersion = "$detektVersion"
+    input = files(                                        // The directories where detekt looks for source files. Defaults to `files("src/main/java", "src/main/kotlin")`.
+            "src/main/kotlin",
+            "gensrc/main/kotlin"
+    )
+    buildUponDefaultConfig = true
+}
+
+afterEvaluate {
+    check.dependsOn 'detektCheck'
+}
