@@ -9,10 +9,10 @@ import dagger.Module
 import kotlin.reflect.KClass
 
 @Module
-abstract class ViewModelBuilderModule {
+interface ViewModelBuilderModule {
 
     @Binds
-    abstract fun bindViewModeFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+    fun bindViewModeFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }
 
 @Target(
