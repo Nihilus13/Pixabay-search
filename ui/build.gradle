@@ -5,8 +5,11 @@ apply from: "$rootDir/gradle/common.gradle"
 apply from: "$rootDir/gradle/dagger.gradle"
 
 android {
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
-        applicationId "${appId}.resume"
+        applicationId "${appId}.pixabay"
     }
 }
 
@@ -15,6 +18,7 @@ dependencies {
     implementation project(":domain")
     implementation project(":features:imageloader")
     implementation project(":features:coroutines")
+    implementation project(":features:scaffold")
 
     implementation "androidx.constraintlayout:constraintlayout:$androidxConstraintLayoutVersion"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$coordinatorLayoutVersion"

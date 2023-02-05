@@ -14,7 +14,7 @@
         android:theme="@style/Theme.PixabaySearch"
         tools:targetApi="31">
         <activity
-            android:name="com.nihilus13.pixabay.MainActivity"
+            android:name="com.nihilus13.pixabay.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

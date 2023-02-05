@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/gradle/common.gradle"
+android {
+    buildFeatures {
+        viewBinding true
+    }
+}
+dependencies {
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation "androidx.databinding:databinding-runtime:$androidPluginVersion"
+}

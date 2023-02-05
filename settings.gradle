@@ -19,3 +19,4 @@ include ':domain'
 
 include ':features:imageloader'
 include ':features:coroutines'
+include ':features:scaffold'

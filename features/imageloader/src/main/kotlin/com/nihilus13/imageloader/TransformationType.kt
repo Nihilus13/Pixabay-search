@@ -7,7 +7,7 @@ sealed class TransformationType {
 
     object CircleCrop : TransformationType()
 
-    class RoundedCorners(
+    data class RoundedCorners(
         val topLeftRadiusInPx: Float,
         val topRightRadiusInPx: Float,
         val bottomLeftRadiusInPx: Float,
@@ -16,7 +16,7 @@ sealed class TransformationType {
         constructor(radiusInPx: Float) : this(radiusInPx, radiusInPx, radiusInPx, radiusInPx)
     }
 
-    class Stroke(
+    data class Stroke(
         @Px val radius: Float,
         @Px val strokeWidth: Float,
         @ColorInt val strokeColor: Int
