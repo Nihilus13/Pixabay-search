@@ -4,8 +4,9 @@ import android.view.ViewGroup
 import com.nihilus13.scaffold.adapter.holder.AbstractViewHolder
 import com.nihilus13.scaffold.adapter.model.RecyclerItem
 
-abstract class AbstractViewHolderDelegate<VIEW_HOLDER : AbstractViewHolder<RECYCLER_ITEM>, in RECYCLER_ITEM : RecyclerItem, BINDING>
-constructor(private val inflateBinding: (ViewGroup) -> BINDING) {
+abstract class AbstractViewHolderDelegate<VIEW_HOLDER : AbstractViewHolder<RECYCLER_ITEM>,
+        in RECYCLER_ITEM : RecyclerItem,
+        BINDING> constructor(private val inflateBinding: (ViewGroup) -> BINDING) {
 
     abstract fun getViewHolderType(): Int
 
