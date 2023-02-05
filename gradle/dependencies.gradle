@@ -7,16 +7,14 @@ ext {
     minVersion = 22
     targetVersion = 33
     kotlinVersion = "1.8.0"
-    gradlePluginVersion = "3.6.1"
-    buildToolVersion = "30.0.3"
+    buildToolVersion = "33.0.1"
 
     codeVersion = getVersionNumber()
     nameVersion = "1.${getVersionNumber()}"
-    googlePlayServicesVersion = "4.3.3"
+    androidPluginVersion = "7.3.1"
 
     ktxVersion = "1.9.0"
     ktxLifecycleVersion = "2.2.0"
-    activityKtxVersion = "1.1.0"
     liveDataVersion = "2.6.0-alpha05"
 
     androidxConstraintLayoutVersion = "2.1.4"
