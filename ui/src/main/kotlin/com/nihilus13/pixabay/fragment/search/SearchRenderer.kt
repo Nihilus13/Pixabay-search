@@ -3,6 +3,7 @@ package com.nihilus13.pixabay.fragment.search
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nihilus13.imageloader.ImageLoaderManager
@@ -11,6 +12,7 @@ import com.nihilus13.pixabay.fragment.search.adapter.SearchViewHolderDelegate
 import com.nihilus13.pixabay.fragment.search.state.SearchViewState
 import com.nihilus13.scaffold.adapter.CommonAdapter
 import com.nihilus13.scaffold.adapter.delegate.DelegateType
+import com.nihilus13.ui.R
 import com.nihilus13.ui.databinding.PixabaySearchFragmentBinding
 import javax.inject.Inject
 
@@ -22,7 +24,7 @@ internal class SearchRenderer @Inject constructor(private val imageLoaderManager
     private lateinit var onSearchRecyclerItemClick: (String) -> Unit
 
     private val delegates by lazy {
-        setOf(SearchViewHolderDelegate(imageLoaderManager, onSearchRecyclerItemClick))
+        setOf(SearchViewHolderDelegate(imageLoaderManager) { showConfirmationDialog(it) })
     }
     private val commonAdapter by lazy { CommonAdapter(delegates as Set<DelegateType>) }
 
@@ -77,6 +79,16 @@ internal class SearchRenderer @Inject constructor(private val imageLoaderManager
             setOnClickListener { onSearchClick(viewState.searchText) }
         }
         bindSearchEdit(viewState.searchText)
+    }
+
+    private fun showConfirmationDialog(detailId: String) {
+        AlertDialog.Builder(binding.root.context)
+            .setMessage(R.string.app_details_confirmation)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                onSearchRecyclerItemClick(detailId)
+            }
+            .setNegativeButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     private fun bindSearchEdit(searchText: String) {
