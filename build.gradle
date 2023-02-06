@@ -3,7 +3,9 @@
 buildscript {
     apply from: "$rootDir/gradle/dependencies.gradle"
     dependencies {
+        classpath "de.mannodermaus.gradle.plugins:android-junit5:$mannodermausJunit5Version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+        classpath "com.karumi:shot:$shotVersion"
     }
 }
 

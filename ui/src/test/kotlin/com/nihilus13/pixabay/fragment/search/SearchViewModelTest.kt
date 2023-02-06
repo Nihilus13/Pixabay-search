@@ -82,14 +82,14 @@ internal class SearchViewModelTest {
             val searchText = "sheep"
             given(runBlocking { searchUseCaseMock.searchForImages(searchText) })
                 .willReturn(listOf(searchResult1))
-            val viewModel = viewModel()
+            val viewModel = viewModel(initialState.copy(searchText = searchText))
             val states = viewModel.viewState.observeValues()
 
             viewModel.sendAction(SearchAction.Search(searchText))
 
             assertThat(states).isEqualTo(
                 listOf(
-                    initialState,
+                    initialState.copy(searchText = searchText),
                     initialState.copy(
                         searchText = searchText,
                         isPending = true
@@ -133,7 +133,7 @@ internal class SearchViewModelTest {
 
             assertThat(states).isEqualTo(
                 listOf(
-                    initialState,
+                    initialState.copy(results = searchResultsList),
                     SearchSideEffect.ProceedToDetails(1L.toString())
                 )
             )

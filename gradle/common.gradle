@@ -16,8 +16,6 @@ android {
         targetSdkVersion targetVersion
         versionCode codeVersion
         versionName nameVersion
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -38,15 +36,16 @@ android {
         enabled = true
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     testOptions {
         unitTests.returnDefaultValues = true
         unitTests.includeAndroidResources = true
+        animationsDisabled = false
     }
 }
 

@@ -6,17 +6,22 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.nihilus13.pixabay.activity.di.PixabayComponentProvider
+import com.nihilus13.pixabay.common.StateObserver
 import com.nihilus13.pixabay.fragment.search.state.SearchAction
 import com.nihilus13.pixabay.fragment.search.state.SearchSideEffect
+import com.nihilus13.pixabay.fragment.search.state.SearchViewState
 import com.nihilus13.pixabay.injection.GenericSavedStateViewModelFactory
 import com.nihilus13.pixabay.lifecycle.viewBinding
 import com.nihilus13.ui.R
 import com.nihilus13.ui.databinding.PixabaySearchFragmentBinding
 import javax.inject.Inject
 
-internal class SearchFragment : Fragment(R.layout.pixabay_search_fragment) {
+internal class SearchFragment : Fragment(R.layout.pixabay_search_fragment),
+    StateObserver<SearchViewState> {
 
     private val binding by viewBinding<PixabaySearchFragmentBinding>()
 
@@ -51,12 +56,16 @@ internal class SearchFragment : Fragment(R.layout.pixabay_search_fragment) {
     }
 
     private fun subscribeUi() {
-        viewModel.viewState.observe(viewLifecycleOwner) {
+        observeState(this) {
             renderer.renderState(it)
         }
         viewModel.sideEffect.observe(viewLifecycleOwner) {
             handleSideEffect(it)
         }
+    }
+
+    override fun bindStateObserver(owner: LifecycleOwner, observer: Observer<SearchViewState>) {
+        viewModel.viewState.observe(owner, observer)
     }
 
     private fun handleSideEffect(sideEffect: SearchSideEffect) {

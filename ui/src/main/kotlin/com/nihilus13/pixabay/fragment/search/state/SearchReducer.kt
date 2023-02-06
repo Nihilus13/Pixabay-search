@@ -10,7 +10,10 @@ internal class SearchReducer @Inject constructor() {
         viewState.copy(isPending = isPending)
 
     fun reduceResult(viewState: SearchViewState, result: List<SearchResult>): SearchViewState =
-        viewState.copy(results = result.map())
+        viewState.copy(
+            results = result.map(),
+            isPending = false
+        )
 
     private fun List<SearchResult>.map(): List<SearchRecyclerItem> =
         map { SearchRecyclerItem(it) }
