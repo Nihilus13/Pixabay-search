@@ -5,6 +5,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 
 apply from: "$rootDir/gradle/dependencies.gradle"
 apply from: "$rootDir/gradle/detekt.gradle"
+apply from: "$rootDir/gradle/test.gradle"
 
 android {
     compileSdkVersion targetVersion
@@ -37,11 +38,11 @@ android {
         enabled = true
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     testOptions {
         unitTests.returnDefaultValues = true
@@ -55,11 +56,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.core:core-ktx:$ktxVersion"
 
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "androidx.test:runner:$supportTestVersion"
-    testImplementation "androidx.test:core-ktx:$testCorektxVersion"
-    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation project(":testing:")
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
 
     testImplementation("androidx.arch.core:core-testing:$archTestingVersion", {

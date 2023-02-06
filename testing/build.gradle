@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/gradle/dependencies.gradle"
+apply from: "$rootDir/gradle/test.gradle"
+
+android {
+    compileSdkVersion targetVersion
+    buildToolsVersion buildToolVersion
+
+    defaultConfig {
+        minSdkVersion minVersion
+        targetSdkVersion targetVersion
+
+        testInstrumentationRunner "org.karumi.shot.ShotTestRunner"
+    }
+
+    sourceSets {
+        main {
+            main.java.srcDirs += 'src/main/kotlin'
+            test.java.srcDirs += 'src/test/kotlin'
+        }
+    }
+}
+
+dependencies {
+    implementation project(":features:coroutines")
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$liveDataVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
+}

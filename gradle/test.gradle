@@ -1,0 +1,26 @@
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/gradle/dependencies.gradle"
+
+dependencies {
+    testImplementation "com.google.truth:truth:$truthVersion"
+
+    implementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+
+    testImplementation "androidx.test.ext:junit:$extJunitVersion"
+    testImplementation "androidx.test:core:$testCoreVersion"
+    testImplementation "androidx.test:core-ktx:$testCorektxVersion"
+    testImplementation "androidx.test:runner:$supportTestVersion"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation("androidx.arch.core:core-testing:$archTestingVersion", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
+    testImplementation "junit:junit:$junitVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutineVersion"
+
+    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
+}

@@ -3,6 +3,10 @@ apply plugin: 'com.android.library'
 apply from: "$rootDir/gradle/common.gradle"
 
 dependencies {
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$liveDataVersion"
+
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$ktxLifecycleVersion"
