@@ -3,11 +3,11 @@ package com.nihilus13.coroutines.safeapi
 import android.util.Log
 
 @Suppress("TooGenericExceptionCaught")
-inline fun <T> safeApiCall(responseFunction: () -> T): SafeApiResponse<T> =
+suspend fun <T> asContentResponse(contentResponseFunction: suspend () -> T): ContentResponse<T> =
     try {
-        val response = responseFunction()
-        SafeApiResponse.Success(response)
+        val response = contentResponseFunction()
+        ContentResponse.Success(response)
     } catch (e: Exception) {
         Log.d(e.message, e.stackTraceToString())
-        SafeApiResponse.Failure(e)
+        ContentResponse.Failure(e)
     }

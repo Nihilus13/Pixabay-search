@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 apply from: "$rootDir/gradle/common.gradle"
+apply from: "$rootDir/gradle/dagger.gradle"
 
 android {
     defaultConfig {
@@ -11,4 +12,9 @@ android {
 dependencies {
     implementation project(":domain")
     implementation project(":features:coroutines")
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 }

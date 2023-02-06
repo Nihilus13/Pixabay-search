@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         PixabayModule::class,
-        ViewModelBuilderModule::class
+        ViewModelBuilderModule::class,
     ]
 )
 internal interface PixabayComponent {
