@@ -2,6 +2,9 @@
 
 buildscript {
     apply from: "$rootDir/gradle/dependencies.gradle"
+    dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
+    }
 }
 
 plugins {

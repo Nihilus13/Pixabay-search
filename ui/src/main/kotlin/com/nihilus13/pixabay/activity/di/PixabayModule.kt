@@ -1,6 +1,9 @@
 package com.nihilus13.pixabay.activity.di
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.nihilus13.imageloader.ImageLoadManagerProvider.createImageLoaderManager
+import com.nihilus13.imageloader.ImageLoaderManager
 import com.nihilus13.pixabay.activity.PixabayViewModel
 import com.nihilus13.pixabay.injection.di.ViewModelKey
 import dagger.Binds
@@ -21,6 +24,10 @@ internal interface PixabayModule {
     companion object {
 
         @Provides
-        fun proviceDispatcher(): CoroutineDispatcher = Dispatchers.IO
+        fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+        @Provides
+        fun provideImageLoader(context: Context): ImageLoaderManager =
+            createImageLoaderManager(context)
     }
 }

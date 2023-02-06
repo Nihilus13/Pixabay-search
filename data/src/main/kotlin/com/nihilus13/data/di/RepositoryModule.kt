@@ -13,11 +13,11 @@ import dagger.Provides
 internal object RepositoryModule {
 
     @Provides
-    fun provideRemoteDataSource(remoteDataSource: RemoteDataSourceImpl): RemoteDataSource =
+    internal fun provideRemoteDataSource(remoteDataSource: RemoteDataSourceImpl): RemoteDataSource =
         remoteDataSource
 
     @Provides
-    fun provideCachedDataSource(cachedDataSource: CachedDataSourceImpl): CachedDataSource =
+    internal fun provideCachedDataSource(cachedDataSource: CachedDataSourceImpl): CachedDataSource =
         cachedDataSource
 
     @Provides

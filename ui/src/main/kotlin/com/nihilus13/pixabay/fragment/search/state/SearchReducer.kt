@@ -14,4 +14,7 @@ internal class SearchReducer @Inject constructor() {
 
     private fun List<SearchResult>.map(): List<SearchRecyclerItem> =
         map { SearchRecyclerItem(it) }
+
+    fun reduceSearchText(viewState: SearchViewState, searchText: String): SearchViewState =
+        viewState.copy(searchText = searchText)
 }

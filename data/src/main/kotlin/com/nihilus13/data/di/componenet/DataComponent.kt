@@ -1,8 +1,10 @@
 package com.nihilus13.data.di.componenet
 
+import android.app.Application
 import android.content.Context
 import com.nihilus13.data.di.DatabaseModule
 import com.nihilus13.data.di.NetworkModule
+import com.nihilus13.data.di.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -11,7 +13,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         NetworkModule::class,
-        DatabaseModule::class]
+        DatabaseModule::class,
+        RepositoryModule::class]
 )
 interface DataComponent {
 
@@ -20,5 +23,5 @@ interface DataComponent {
         fun create(@BindsInstance applicationContext: Context): DataComponent
     }
 
-    fun inject(application: DataApplication)
+    fun inject(application: Application)
 }

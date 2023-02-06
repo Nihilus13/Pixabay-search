@@ -33,6 +33,8 @@ internal class SearchViewModel internal constructor(
         when (action) {
             is SearchAction.Search -> onSearch(action.searchText)
             SearchAction.InitialSearch -> onSearch(_viewState.value!!.searchText)
+            is SearchAction.ShowDetails -> onShowDetails(action.detailsId)
+            is SearchAction.UpdateText -> onUpdateText(action.updatedText)
         }
     }
 
@@ -48,6 +50,14 @@ internal class SearchViewModel internal constructor(
         reduce { reducer.reducePending(_viewState.value!!) }
         val result = searchUseCase.searchForImages(searchText)
         reduce { reducer.reduceResult(_viewState.value!!, result) }
+    }
+
+    private fun onShowDetails(detailsId: String) {
+        sideEffect.value = SearchSideEffect.ProceedToDetails(detailsId)
+    }
+
+    private fun onUpdateText(updatedText: String) {
+        reduce { reducer.reduceSearchText(_viewState.value!!, updatedText) }
     }
 
     private fun reduce(reducer: suspend SearchViewState.() -> SearchViewState) =

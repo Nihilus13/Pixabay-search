@@ -4,6 +4,6 @@ import android.content.Context
 
 object ImageLoadManagerProvider {
 
-    fun createImageLoaderManager(context: Context): ImageLoadManager =
-        ImageLoaderManagerImpl(context)
+    fun createImageLoaderManager(context: Context): ImageLoaderManager =
+        ImageLoaderManagerManagerImpl(context)
 }

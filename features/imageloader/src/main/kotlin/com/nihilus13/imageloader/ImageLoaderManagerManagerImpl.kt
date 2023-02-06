@@ -14,7 +14,8 @@ import com.nihilus13.imageloader.TransformationType.RoundedCorners
 import com.nihilus13.imageloader.TransformationType.Stroke
 import com.nihilus13.imageloader.transformation.RoundedCornerStrokeTransformation
 
-internal class ImageLoaderManagerImpl internal constructor(context: Context) : ImageLoadManager {
+internal class ImageLoaderManagerManagerImpl internal constructor(context: Context) :
+    ImageLoaderManager {
 
     private val imageLoader: ImageLoader
 

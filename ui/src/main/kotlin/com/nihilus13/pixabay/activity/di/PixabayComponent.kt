@@ -7,9 +7,7 @@ import com.nihilus13.pixabay.fragment.search.di.SearchComponent
 import com.nihilus13.pixabay.injection.di.ViewModelBuilderModule
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
 @Component(
     modules = [
         PixabayModule::class,

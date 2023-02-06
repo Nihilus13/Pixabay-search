@@ -2,7 +2,8 @@ package com.nihilus13.imageloader
 
 import android.widget.ImageView
 
-interface ImageLoadManager {
+interface ImageLoaderManager {
+
     fun loadImage(
         imageView: ImageView,
         imageUrl: String,

@@ -7,10 +7,10 @@ import com.nihilus13.scaffold.adapter.delegate.DelegateType
 import com.nihilus13.scaffold.adapter.holder.AbstractViewHolder
 import com.nihilus13.scaffold.adapter.model.RecyclerItem
 
-open class CommonAdapter private constructor(private val setViewHolderBinders: Set<DelegateType>) :
+class CommonAdapter(private val setViewHolderBinders: Set<DelegateType>) :
     RecyclerView.Adapter<AbstractViewHolder<RecyclerItem>>() {
 
-    private val asyncDiff by lazy { AsyncListDiffer(this, CommonDiffItemCallback()) }
+    private val asyncDiff = AsyncListDiffer(this, CommonDiffItemCallback())
 
     private var list: List<RecyclerItem>
         get() = asyncDiff.currentList

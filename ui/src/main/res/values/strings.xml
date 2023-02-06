@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Pixabay search</string>
+
+    <string name="app_search_hint">Search phrase</string>
+    <string name="app_search">Search</string>
+
+    <string name="app_warning">Blank search text</string>
 </resources>
