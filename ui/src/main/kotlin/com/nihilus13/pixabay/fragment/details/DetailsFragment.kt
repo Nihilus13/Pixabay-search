@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.nihilus13.pixabay.activity.di.PixabayComponentProvider
 import com.nihilus13.pixabay.common.StateObserver
 import com.nihilus13.pixabay.fragment.details.state.DetailsAction
@@ -21,6 +22,8 @@ internal class DetailsFragment : Fragment(R.layout.pixabay_details_fragment),
     StateObserver<DetailsViewState> {
 
     private val binding by viewBinding<PixabayDetailsFragmentBinding>()
+
+    private val args: DetailsFragmentArgs by navArgs()
 
     @Inject
     lateinit var renderer: DetailsRenderer
@@ -37,7 +40,7 @@ internal class DetailsFragment : Fragment(R.layout.pixabay_details_fragment),
         PixabayComponentProvider
             .getPixabayComponent(requireActivity().applicationContext)
             .detailsComponent()
-            .create()
+            .create(args.detailsId)
             .inject(this)
     }
 

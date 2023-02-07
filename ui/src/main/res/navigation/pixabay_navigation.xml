@@ -20,7 +20,7 @@
         android:label="DetailsFragment"
         tools:layout="@layout/pixabay_details_fragment">
         <argument
-            android:name="searchId"
+            android:name="detailsId"
             app:argType="string" />
     </fragment>
 </navigation>

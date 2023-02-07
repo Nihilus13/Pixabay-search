@@ -11,6 +11,7 @@ import dagger.multibindings.IntoMap
 
 @Module
 internal interface SearchModule {
+
     @Binds
     @IntoMap
     @ViewModelKey(SearchViewModel::class)

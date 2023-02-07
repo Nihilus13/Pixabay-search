@@ -1,10 +1,6 @@
 package com.nihilus13.pixabay.fragment.details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.nihilus13.domain.usecase.LoadDetailsUseCase
 import com.nihilus13.pixabay.fragment.details.state.DetailsAction
 import com.nihilus13.pixabay.fragment.details.state.DetailsReducer
@@ -17,7 +13,7 @@ import javax.inject.Inject
 
 internal class DetailsViewModel internal constructor(
     private val _viewState: MutableLiveData<DetailsViewState>,
-    private val searchUseCase: LoadDetailsUseCase,
+    private val loadDetailsUseCase: LoadDetailsUseCase,
     private val dispatcher: CoroutineDispatcher,
     private val reducer: DetailsReducer
 ) : ViewModel() {
@@ -32,8 +28,8 @@ internal class DetailsViewModel internal constructor(
     }
 
     private fun onInitialLoad() = viewModelScope.launch {
-        val details = searchUseCase.loadDetails(_viewState.value!!.detailsId)
-        reduce { reducer.reduceBankingList(_viewState.value) }
+        val details = loadDetailsUseCase.loadDetails(_viewState.value!!.detailsId)
+        reduce { reducer.reduceDetails(_viewState.value!!, details) }
     }
 
     private fun reduce(reducer: suspend DetailsViewState.() -> DetailsViewState) =
@@ -53,7 +49,7 @@ internal class DetailsViewModelFactory @Inject constructor(
     override fun create(savedStateHandle: SavedStateHandle): DetailsViewModel =
         DetailsViewModel(
             _viewState = savedStateHandle.getSavedStateLiveData(initialState),
-            searchUseCase = searchUseCase,
+            loadDetailsUseCase = searchUseCase,
             dispatcher = dispatcher,
             reducer = reducer
         )

@@ -10,9 +10,10 @@ internal sealed class DetailsViewState(open val detailsId: String) : Parcelable 
     data class Pending(override val detailsId: String) : DetailsViewState(detailsId)
 
     @Parcelize
-    data class Data(override val detailsId: String, val detailsResult: DetailsResult) :
+    data class Data(override val detailsId: String, val result: DetailsResult) :
         DetailsViewState(detailsId)
 
     @Parcelize
-    data class Error(override val detailsId: String) : DetailsViewState(detailsId)
+    data class Error(override val detailsId: String) :
+        DetailsViewState(detailsId)
 }

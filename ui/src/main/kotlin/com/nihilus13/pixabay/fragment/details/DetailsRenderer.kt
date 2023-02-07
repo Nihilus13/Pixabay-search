@@ -35,13 +35,13 @@ internal class DetailsRenderer @Inject constructor(private val imageLoaderManage
         binding.container.isVisible = true
         binding.error.isVisible = false
         binding.progressIndicator.isVisible = false
-        imageLoaderManager.loadImage(binding.image, viewState.detailsResult.largeImageURL)
+        imageLoaderManager.loadImage(binding.image, viewState.result.largeImageURL)
         with(binding) {
-            usernameText.text = viewState.detailsResult.pixabayUserName
-            tagsText.text = viewState.detailsResult.tags.joinToString(", ")
-            commentsText.text = viewState.detailsResult.comments.toString()
-            likesText.text = viewState.detailsResult.likes.toString()
-            downloadsText.text = viewState.detailsResult.downloads.toString()
+            usernameText.text = viewState.result.pixabayUserName
+            tagsText.text = viewState.result.tags.joinToString(", ")
+            commentsText.text = viewState.result.comments.toString()
+            likesText.text = viewState.result.likes.toString()
+            downloadsText.text = viewState.result.downloads.toString()
         }
     }
 
