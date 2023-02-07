@@ -22,7 +22,7 @@ internal object TestDataProvider {
     val detailsResult = DetailsResult(
         id = "1L",
         largeImageURL = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
-        pixabayUserName = "Hugo",
+        user = "Hugo",
         tags = listOf("awesome", "beauty", "sun"),
         downloads = 3L,
         likes = 5L,

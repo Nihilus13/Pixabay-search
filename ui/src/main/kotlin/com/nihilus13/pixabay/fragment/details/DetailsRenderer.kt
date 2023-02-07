@@ -37,7 +37,7 @@ internal class DetailsRenderer @Inject constructor(private val imageLoaderManage
         binding.progressIndicator.isVisible = false
         imageLoaderManager.loadImage(binding.image, viewState.result.largeImageURL)
         with(binding) {
-            usernameText.text = viewState.result.pixabayUserName
+            usernameText.text = viewState.result.user
             tagsText.text = viewState.result.tags.joinToString(", ")
             commentsText.text = viewState.result.comments.toString()
             likesText.text = viewState.result.likes.toString()

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class DetailsResult(
     val id: String,
     val largeImageURL: String,
-    val pixabayUserName: String,
+    val user: String,
     val tags: List<String>,
     val likes: Long,
     val downloads: Long,

@@ -25,6 +25,7 @@ ext {
     navigationVersion = "2.5.3"
 
     roomVersion = "2.5.0"
+    sqliteVersion = "2.3.0"
     daggerVersion = "2.44"
     gsonVersion = "2.8.5"
     retrofitVersion = "2.9.0"

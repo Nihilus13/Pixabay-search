@@ -10,7 +10,7 @@ internal object DetailsDataProvider {
     private val result = DetailsResult(
         id = DETAILS_ID,
         largeImageURL = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
-        pixabayUserName = "Hugo",
+        user = "Hugo",
         tags = listOf("awesome", "beauty", "sun"),
         likes = 5L,
         downloads = 3L,
