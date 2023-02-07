@@ -5,7 +5,7 @@ import com.nihilus13.domain.usecase.LoadDetailsUseCase
 
 internal class LoadDetailsUseCaseImpl : LoadDetailsUseCase {
 
-    override suspend fun loadDetails(id: String): List<DetailsResult> {
+    override suspend fun loadDetails(id: String): DetailsResult {
         TODO("Not yet implemented")
     }
 }

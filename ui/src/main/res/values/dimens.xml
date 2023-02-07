@@ -5,4 +5,6 @@
     <dimen name="size_medium">56dp</dimen>
     <dimen name="size_large">82dp</dimen>
 
+    <dimen name="guide_percent_half">0.5</dimen>
+
 </resources>

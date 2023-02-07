@@ -1,11 +1,36 @@
 package com.nihilus13.pixabay.fragment.details
 
 import android.content.Context
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.nihilus13.pixabay.activity.di.PixabayComponentProvider
+import com.nihilus13.pixabay.common.StateObserver
+import com.nihilus13.pixabay.fragment.details.state.DetailsAction
+import com.nihilus13.pixabay.fragment.details.state.DetailsViewState
+import com.nihilus13.pixabay.injection.GenericSavedStateViewModelFactory
+import com.nihilus13.pixabay.lifecycle.viewBinding
 import com.nihilus13.ui.R
+import com.nihilus13.ui.databinding.PixabayDetailsFragmentBinding
+import javax.inject.Inject
 
-internal class DetailsFragment : Fragment(R.layout.pixabay_details_fragment) {
+internal class DetailsFragment : Fragment(R.layout.pixabay_details_fragment),
+    StateObserver<DetailsViewState> {
+
+    private val binding by viewBinding<PixabayDetailsFragmentBinding>()
+
+    @Inject
+    lateinit var renderer: DetailsRenderer
+
+    @Inject
+    lateinit var viewModelFactory: DetailsViewModelFactory
+
+    private val viewModel: DetailsViewModel by viewModels {
+        GenericSavedStateViewModelFactory(viewModelFactory, this, arguments)
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -14,5 +39,25 @@ internal class DetailsFragment : Fragment(R.layout.pixabay_details_fragment) {
             .detailsComponent()
             .create()
             .inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        renderer.init(
+            binding = binding,
+            onRefresh = { viewModel.sendAction(DetailsAction.InitialLoad) }
+        )
+        subscribeUi()
+        savedInstanceState ?: viewModel.sendAction(DetailsAction.InitialLoad)
+    }
+
+    private fun subscribeUi() {
+        observeState(this) {
+            renderer.renderState(it)
+        }
+    }
+
+    override fun bindStateObserver(owner: LifecycleOwner, observer: Observer<DetailsViewState>) {
+        viewModel.viewState.observe(owner, observer)
     }
 }
