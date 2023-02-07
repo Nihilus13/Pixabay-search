@@ -72,11 +72,15 @@ internal class SearchFragment : Fragment(R.layout.pixabay_search_fragment),
         when (sideEffect) {
             SearchSideEffect.BlankSearchText -> showBlankSearchWarning()
             is SearchSideEffect.ProceedToDetails -> navigateToDetails(sideEffect.detailsId)
+            SearchSideEffect.SearchError -> showSearchError()
         }
     }
 
     private fun showBlankSearchWarning() =
-        Toast.makeText(requireContext(), R.string.app_warning, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), R.string.app_search_blank_text_warning, Toast.LENGTH_SHORT).show()
+
+    private fun showSearchError() =
+        Toast.makeText(requireContext(), R.string.app_search_error, Toast.LENGTH_SHORT).show()
 
     private fun navigateToDetails(searchId: String) {
         val direction = SearchFragmentDirections.navigateToDetailsFragment(searchId)

@@ -1,10 +1,7 @@
 package com.nihilus13.pixabay.fragment.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.nihilus13.domain.usecase.SearchForImageResult
 import com.nihilus13.domain.usecase.SearchUseCase
 import com.nihilus13.pixabay.fragment.search.state.SearchAction
 import com.nihilus13.pixabay.fragment.search.state.SearchReducer
@@ -49,6 +46,9 @@ internal class SearchViewModel internal constructor(
     private fun onSearchInternal(searchText: String) = viewModelScope.launch {
         reduce { reducer.reducePending(_viewState.value!!) }
         val result = searchUseCase.searchForImages(searchText)
+        if (result is SearchForImageResult.Error) {
+            sideEffect.value = SearchSideEffect.SearchError
+        }
         reduce { reducer.reduceResult(_viewState.value!!, result) }
     }
 

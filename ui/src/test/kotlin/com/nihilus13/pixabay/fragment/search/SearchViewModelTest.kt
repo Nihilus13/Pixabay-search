@@ -2,9 +2,10 @@ package com.nihilus13.pixabay.fragment.search
 
 import androidx.lifecycle.MutableLiveData
 import com.google.common.truth.Truth.assertThat
+import com.nihilus13.domain.usecase.SearchForImageResult
 import com.nihilus13.domain.usecase.SearchUseCase
-import com.nihilus13.pixabay.fragment.search.TestDataProvider.searchResult1
-import com.nihilus13.pixabay.fragment.search.TestDataProvider.searchResultsList
+import com.nihilus13.pixabay.fragment.TestDataProvider.searchResult1
+import com.nihilus13.pixabay.fragment.TestDataProvider.searchResultsList
 import com.nihilus13.pixabay.fragment.search.adapter.SearchRecyclerItem
 import com.nihilus13.pixabay.fragment.search.state.SearchAction
 import com.nihilus13.pixabay.fragment.search.state.SearchReducer
@@ -38,9 +39,17 @@ internal class SearchViewModelTest {
     inner class InitialSearch {
 
         @Test
+        fun `initial state`() {
+            val viewModel = viewModel()
+            val states = viewModel.viewState.observeValues()
+
+            assertThat(states).isEqualTo(listOf(initialState))
+        }
+
+        @Test
         fun `searches on initial state`() {
             given(runBlocking { searchUseCaseMock.searchForImages(initialState.searchText) })
-                .willReturn(listOf(searchResult1))
+                .willReturn(SearchForImageResult.Success(listOf(searchResult1)))
             val viewModel = viewModel()
             val states = viewModel.viewState.observeValues()
 
@@ -59,7 +68,7 @@ internal class SearchViewModelTest {
         fun `searches on initial state search text empty`() {
             val emptyInitialState = initialState.copy(searchText = "")
             given(runBlocking { searchUseCaseMock.searchForImages(initialState.searchText) })
-                .willReturn(listOf(searchResult1))
+                .willReturn(SearchForImageResult.Success(listOf(searchResult1)))
             val viewModel = viewModel(emptyInitialState)
             val states = observeValues(viewModel.viewState, viewModel.sideEffect)
 
@@ -81,7 +90,7 @@ internal class SearchViewModelTest {
         fun `searches for result`() {
             val searchText = "sheep"
             given(runBlocking { searchUseCaseMock.searchForImages(searchText) })
-                .willReturn(listOf(searchResult1))
+                .willReturn(SearchForImageResult.Success(listOf(searchResult1)))
             val viewModel = viewModel(initialState.copy(searchText = searchText))
             val states = viewModel.viewState.observeValues()
 
@@ -106,7 +115,7 @@ internal class SearchViewModelTest {
         fun `searches for result with search text empty`() {
             val searchText = ""
             given(runBlocking { searchUseCaseMock.searchForImages(searchText) })
-                .willReturn(listOf(searchResult1))
+                .willReturn(SearchForImageResult.Success(listOf(searchResult1)))
             val viewModel = viewModel()
             val states = observeValues(viewModel.viewState, viewModel.sideEffect)
 

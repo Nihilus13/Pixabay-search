@@ -3,9 +3,8 @@
 
     <string name="app_search_hint">Search phrase</string>
     <string name="app_search">Search</string>
-    <string name="app_warning">Blank search text</string>
+    <string name="app_search_blank_text_warning">Blank search text</string>
+    <string name="app_search_error">Blank search text</string>
     <string name="app_details_confirmation">Do you want to check details</string>
-
     <string name="app_details_error">Loading error</string>
-
 </resources>
