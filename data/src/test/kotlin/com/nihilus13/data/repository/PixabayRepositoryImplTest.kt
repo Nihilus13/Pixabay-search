@@ -6,6 +6,8 @@ import com.nihilus13.data.TestDataProvider.HIT_ID
 import com.nihilus13.data.TestDataProvider.SEARCH_TEXT
 import com.nihilus13.data.TestDataProvider.hitData
 import com.nihilus13.data.TestDataProvider.searchRecord
+import com.nihilus13.domain.model.DetailsResult
+import com.nihilus13.domain.model.SearchResult
 import com.nihilus13.domain.repository.source.CachedDataSource
 import com.nihilus13.domain.repository.source.RemoteDataSource
 import kotlinx.coroutines.runBlocking
@@ -27,7 +29,7 @@ internal class PixabayRepositoryImplTest {
     @Test
     fun `searches for images`() = runBlocking {
         given { runBlocking { remoteDataSource.searchForImages(SEARCH_TEXT) } }
-            .willReturn(ContentResponse.Success(searchRecord))
+            .willReturn(ContentResponse.Success(SearchResult.Data(searchRecord)))
 
         pixabayRepository.searchForImages(SEARCH_TEXT)
 
@@ -48,7 +50,7 @@ internal class PixabayRepositoryImplTest {
     @Test
     fun `fetches details`() = runBlocking {
         given { runBlocking { remoteDataSource.fetchDetails(HIT_ID) } }
-            .willReturn(ContentResponse.Success(hitData))
+            .willReturn(ContentResponse.Success(DetailsResult.Data(hitData)))
 
         pixabayRepository.fetchDetails(HIT_ID)
 

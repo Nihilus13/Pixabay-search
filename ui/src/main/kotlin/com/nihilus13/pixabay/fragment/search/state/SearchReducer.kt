@@ -1,8 +1,8 @@
 package com.nihilus13.pixabay.fragment.search.state
 
+import com.nihilus13.domain.model.HitData
 import com.nihilus13.domain.model.SearchResult
-import com.nihilus13.domain.usecase.SearchForImageResult
-import com.nihilus13.pixabay.fragment.search.adapter.SearchRecyclerItem
+import com.nihilus13.pixabay.fragment.search.adapter.HitRecyclerItem
 import javax.inject.Inject
 
 internal class SearchReducer @Inject constructor() {
@@ -10,17 +10,17 @@ internal class SearchReducer @Inject constructor() {
     fun reducePending(viewState: SearchViewState, isPending: Boolean = true): SearchViewState =
         viewState.copy(isPending = isPending)
 
-    fun reduceResult(viewState: SearchViewState, result: SearchForImageResult): SearchViewState =
+    fun reduceResult(viewState: SearchViewState, result: SearchResult): SearchViewState =
         when (result) {
-            SearchForImageResult.Error -> viewState
-            is SearchForImageResult.Success -> viewState.copy(
-                results = result.results.map(),
+            SearchResult.NoData -> viewState
+            is SearchResult.Data -> viewState.copy(
+                results = result.record.hits.map(),
                 isPending = false
             )
         }
 
-    private fun List<SearchResult>.map(): List<SearchRecyclerItem> =
-        map { SearchRecyclerItem(it) }
+    private fun List<HitData>.map(): List<HitRecyclerItem> =
+        map { HitRecyclerItem(it) }
 
     fun reduceSearchText(viewState: SearchViewState, searchText: String): SearchViewState =
         viewState.copy(searchText = searchText)

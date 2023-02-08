@@ -2,9 +2,9 @@ package com.nihilus13.pixabay.fragment.details
 
 import androidx.lifecycle.MutableLiveData
 import com.google.common.truth.Truth.assertThat
-import com.nihilus13.domain.usecase.LoadDetailsResult
 import com.nihilus13.domain.usecase.LoadDetailsUseCase
 import com.nihilus13.pixabay.fragment.TestDataProvider.detailsResult
+import com.nihilus13.pixabay.fragment.TestDataProvider.detailsResultNoData
 import com.nihilus13.pixabay.fragment.details.state.DetailsAction
 import com.nihilus13.pixabay.fragment.details.state.DetailsReducer
 import com.nihilus13.pixabay.fragment.details.state.DetailsViewState
@@ -40,7 +40,7 @@ internal class DetailsViewModelTest {
         @Test
         fun `initial loads details with success`() {
             given { runBlocking { loadDetailsUseCase.loadDetails(DETAILS_ID) } }
-                .willReturn(LoadDetailsResult.Success(detailsResult))
+                .willReturn(detailsResult)
             val viewModel = viewModel()
             val states = viewModel.viewState.observeValues()
 
@@ -60,7 +60,7 @@ internal class DetailsViewModelTest {
         @Test
         fun `initial loads details with error`() {
             given { runBlocking { loadDetailsUseCase.loadDetails(DETAILS_ID) } }
-                .willReturn(LoadDetailsResult.Error)
+                .willReturn(detailsResultNoData)
             val viewModel = viewModel()
             val states = viewModel.viewState.observeValues()
 

@@ -1,31 +1,39 @@
 package com.nihilus13.pixabay.fragment
 
 import com.nihilus13.domain.model.DetailsResult
+import com.nihilus13.domain.model.HitData
+import com.nihilus13.domain.model.SearchRecord
 import com.nihilus13.domain.model.SearchResult
-import com.nihilus13.pixabay.fragment.search.adapter.SearchRecyclerItem
+import com.nihilus13.pixabay.fragment.search.adapter.HitRecyclerItem
 
 internal object TestDataProvider {
 
-    val searchResult1 = SearchResult(
-        id = 1L,
+    const val SEARCH_TEXT: String = "flower"
+    private const val HIT_LONG_ID = 1L
+    private const val HIT_ID = HIT_LONG_ID.toString()
+    private const val TOTAL = 1L
+
+    val hitData = HitData(
+        id = HIT_ID,
         thumbnailUrl = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
-        pixabayUserName = "Hugo",
-        tags = listOf("awesome", "beauty", "sun"),
+        largeImageUrl = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
+        tags = "awesome, beauty, sun",
         user = "Hugo",
-        downloads = 3L,
         likes = 5L,
-        comments = 10L,
+        downloads = 3L,
+        comments = 10L
+    )
+    val searchRecord = SearchRecord(
+        searchText = SEARCH_TEXT,
+        total = TOTAL,
+        totalHits = TOTAL,
+        hits = listOf(hitData)
     )
 
-    val searchResultsList = listOf(searchResult1).map { SearchRecyclerItem(it) }
-
-    val detailsResult = DetailsResult(
-        id = "1L",
-        largeImageURL = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
-        user = "Hugo",
-        tags = listOf("awesome", "beauty", "sun"),
-        downloads = 3L,
-        likes = 5L,
-        comments = 10L,
-    )
+    val searchResult = SearchResult.Data(searchRecord)
+    val searchResultNoData = SearchResult.NoData
+    val searchResultsList = listOf(searchResult).map { HitRecyclerItem(hitData) }
+    val detailsResult = DetailsResult.Data(hitData)
+    val detailsResultNoData = DetailsResult.NoData
+    val hitRecyclerItem = HitRecyclerItem(hitData)
 }

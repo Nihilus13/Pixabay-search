@@ -1,6 +1,10 @@
 package com.nihilus13.pixabay.fragment.details
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.nihilus13.domain.usecase.LoadDetailsUseCase
 import com.nihilus13.pixabay.fragment.details.state.DetailsAction
 import com.nihilus13.pixabay.fragment.details.state.DetailsReducer
@@ -11,6 +15,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@SuppressWarnings("ConstructorParameterNaming")
 internal class DetailsViewModel internal constructor(
     private val _viewState: MutableLiveData<DetailsViewState>,
     private val loadDetailsUseCase: LoadDetailsUseCase,

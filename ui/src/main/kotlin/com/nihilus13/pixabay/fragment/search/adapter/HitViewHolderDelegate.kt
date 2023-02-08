@@ -6,13 +6,13 @@ import com.nihilus13.imageloader.ImageLoaderManager
 import com.nihilus13.scaffold.adapter.delegate.AbstractViewHolderDelegate
 import com.nihilus13.scaffold.adapter.model.RecyclerItem
 import com.nihilus13.ui.R
-import com.nihilus13.ui.databinding.PixabaySearchItemBinding
+import com.nihilus13.ui.databinding.PixabayHitItemBinding
 
-internal class SearchViewHolderDelegate internal constructor(
+internal class HitViewHolderDelegate internal constructor(
     private val imageLoaderManager: ImageLoaderManager,
     private val onSearchRecyclerItemClick: (String) -> Unit,
-    bindingInflater: (ViewGroup) -> PixabaySearchItemBinding
-) : AbstractViewHolderDelegate<SearchViewHolder, SearchRecyclerItem, PixabaySearchItemBinding>(
+    bindingInflater: (ViewGroup) -> PixabayHitItemBinding
+) : AbstractViewHolderDelegate<HitViewHolder, HitRecyclerItem, PixabayHitItemBinding>(
     bindingInflater
 ) {
 
@@ -22,22 +22,22 @@ internal class SearchViewHolderDelegate internal constructor(
     ) : this(
         imageLoaderManager,
         onSearchRecyclerItemClick,
-        { PixabaySearchItemBinding.inflate(LayoutInflater.from(it.context), it, false) }
+        { PixabayHitItemBinding.inflate(LayoutInflater.from(it.context), it, false) }
     )
 
     override fun getViewHolderType(): Int = VIEW_TYPE
 
-    override fun createViewHolder(parent: ViewGroup): SearchViewHolder =
-        SearchViewHolder(
+    override fun createViewHolder(parent: ViewGroup): HitViewHolder =
+        HitViewHolder(
             imageLoaderManager = imageLoaderManager,
             onSearchRecyclerItemClick = onSearchRecyclerItemClick,
             binding = createBinding(parent)
         )
 
     override fun typeCheck(recyclerItem: RecyclerItem): Boolean =
-        recyclerItem is SearchRecyclerItem
+        recyclerItem is HitRecyclerItem
 
     companion object {
-        const val VIEW_TYPE: Int = R.layout.pixabay_search_item
+        const val VIEW_TYPE: Int = R.layout.pixabay_hit_item
     }
 }

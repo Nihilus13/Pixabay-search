@@ -1,11 +1,7 @@
-package com.nihilus13.data.di.componenet
+package com.nihilus13.data.di
 
 import android.app.Application
 import android.content.Context
-import com.nihilus13.data.di.DatabaseModule
-import com.nihilus13.data.di.NetworkModule
-import com.nihilus13.data.di.RepositoryModule
-import com.nihilus13.data.di.UtilsModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

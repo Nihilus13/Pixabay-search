@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nihilus13.imageloader.ImageLoaderManager
 import com.nihilus13.pixabay.extensions.hideKeyboard
-import com.nihilus13.pixabay.fragment.search.adapter.SearchViewHolderDelegate
+import com.nihilus13.pixabay.fragment.search.adapter.HitViewHolderDelegate
 import com.nihilus13.pixabay.fragment.search.state.SearchViewState
 import com.nihilus13.scaffold.adapter.CommonAdapter
 import com.nihilus13.scaffold.adapter.delegate.DelegateType
@@ -24,7 +24,7 @@ internal class SearchRenderer @Inject constructor(private val imageLoaderManager
     private lateinit var onSearchRecyclerItemClick: (String) -> Unit
 
     private val delegates by lazy {
-        setOf(SearchViewHolderDelegate(imageLoaderManager) { showConfirmationDialog(it) })
+        setOf(HitViewHolderDelegate(imageLoaderManager) { showConfirmationDialog(it) })
     }
     private val commonAdapter by lazy { CommonAdapter(delegates as Set<DelegateType>) }
 

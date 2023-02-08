@@ -4,6 +4,7 @@
     package="com.nihilus13.ui">
 
     <application
+        android:name="com.nihilus13.pixabay.PixabayApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

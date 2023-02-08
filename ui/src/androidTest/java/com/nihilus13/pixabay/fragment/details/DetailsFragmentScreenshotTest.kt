@@ -3,6 +3,7 @@ package com.nihilus13.pixabay.fragment.details
 import com.karumi.shot.ScreenshotTest
 import com.nihilus13.pixabay.core.compareStateScreenshot
 import com.nihilus13.pixabay.fragment.details.DetailsDataProvider.dataState
+import com.nihilus13.pixabay.fragment.details.DetailsDataProvider.dataStateNoData
 import com.nihilus13.pixabay.fragment.details.DetailsDataProvider.errorState
 import com.nihilus13.pixabay.fragment.details.DetailsDataProvider.pendingState
 import com.nihilus13.pixabay.fragment.details.state.DetailsViewState
@@ -13,6 +14,11 @@ internal class DetailsFragmentScreenshotTest : ScreenshotTest {
     @Test
     fun screenshotTestWithDataState() {
         compareScreenshot(dataState)
+    }
+
+    @Test
+    fun screenshotTestWithNoDataState() {
+        compareScreenshot(dataStateNoData)
     }
 
     @Test
