@@ -1,6 +1,8 @@
 package com.nihilus13.data.db.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.nihilus13.data.db.Contract
 import com.nihilus13.data.db.entity.HitEntity
@@ -10,8 +12,11 @@ internal interface HitDao {
 
     @Query(
         "SELECT * FROM ${Contract.HitTable.TABLE_NAME} " +
-                "WHERE ${Contract.Common.ID} = :id " +
+                "WHERE ${Contract.HitTable.HIT_ID} = :id " +
                 "LIMIT 1;"
     )
     suspend fun getHit(id: String): HitEntity
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHits(hit: List<HitEntity>)
 }

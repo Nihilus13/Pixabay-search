@@ -3,6 +3,7 @@ package com.nihilus13.data.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.nihilus13.data.BuildConfig
+import com.nihilus13.data.repository.api.PixabayInterceptor
 import com.nihilus13.data.repository.api.SearchService
 import dagger.Module
 import dagger.Provides
@@ -17,21 +18,15 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttpClient(): OkHttpClient = with(OkHttpClient.Builder()) {
-        if (BuildConfig.DEBUG) {
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-            addInterceptor(logging)
-        }
-        addInterceptor {
-            val original = it.request()
-
-            val request = original.newBuilder()
-                .method(original.method, original.body)
-                .build()
-            it.proceed(request)
-        }
-    }.build()
+    internal fun provideOkHttpClient(interceptor: PixabayInterceptor): OkHttpClient =
+        with(OkHttpClient.Builder()) {
+            if (BuildConfig.DEBUG) {
+                val logging = HttpLoggingInterceptor()
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                addInterceptor(logging)
+            }
+            addInterceptor(interceptor)
+        }.build()
 
     @Provides
     @Singleton

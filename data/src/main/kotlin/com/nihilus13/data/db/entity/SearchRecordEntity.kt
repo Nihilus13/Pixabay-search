@@ -8,10 +8,10 @@ import com.nihilus13.data.db.Contract
 @Entity(tableName = Contract.SearchRecordTable.TABLE_NAME)
 internal data class SearchRecordEntity(
     @PrimaryKey
-    @ColumnInfo(name = Contract.Common.ID)
+    @ColumnInfo(name = Contract.SearchRecordTable.SEARCH_RECORD_ID)
     val id: String,
     @ColumnInfo(name = Contract.Common.CREATED_AT)
-    val timestamp: Long,
+    val createdAt: Long,
     @ColumnInfo(name = Contract.SearchRecordTable.SEARCH_TEXT)
     val searchText: String,
     @ColumnInfo(name = Contract.SearchRecordTable.TOTAL)

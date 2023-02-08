@@ -8,10 +8,10 @@ import com.nihilus13.data.db.Contract
 @Entity(tableName = Contract.HitTable.TABLE_NAME)
 internal data class HitEntity(
     @PrimaryKey
-    @ColumnInfo(name = Contract.Common.ID)
+    @ColumnInfo(name = Contract.HitTable.HIT_ID)
     val id: String,
     @ColumnInfo(name = Contract.Common.CREATED_AT)
-    val timestamp: Long,
+    val createdAt: Long,
     @ColumnInfo(name = Contract.HitTable.THUMBNAIL_URL)
     val thumbnailUrl: String,
     @ColumnInfo(name = Contract.HitTable.LARGE_IMAGE_URL)

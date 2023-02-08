@@ -49,6 +49,7 @@ ext {
     shotVersion = "5.14.1"
     andxTestJunitVersion = "1.1.2"
     andxTestExtTruthVersion = "1.2.0"
+    mockWebServerVersion = "4.10.0"
 
     espressoCoreVersion = "3.5.1"
     appCompatVersion = "1.4.1"

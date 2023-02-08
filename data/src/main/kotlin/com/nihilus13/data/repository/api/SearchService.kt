@@ -9,5 +9,5 @@ internal interface SearchService {
     suspend fun searchImages(searchText: String): SearchResponse
 
     @GET
-    suspend fun refreshImage(imageId: String): SearchResponse
+    suspend fun refreshImage(detailsId: String): SearchResponse
 }
