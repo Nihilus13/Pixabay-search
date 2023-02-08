@@ -1,9 +1,9 @@
 package com.nihilus13.data.di
 
-import com.nihilus13.data.repository.SearchRepositoryImpl
+import com.nihilus13.data.repository.PixabayRepositoryImpl
 import com.nihilus13.data.repository.source.CachedDataSourceImpl
 import com.nihilus13.data.repository.source.RemoteDataSourceImpl
-import com.nihilus13.domain.repository.SearchRepository
+import com.nihilus13.domain.repository.PixabayRepository
 import com.nihilus13.domain.repository.source.CachedDataSource
 import com.nihilus13.domain.repository.source.RemoteDataSource
 import dagger.Module
@@ -21,6 +21,6 @@ internal object RepositoryModule {
         cachedDataSource
 
     @Provides
-    fun provideSearchRepository(searchRepository: SearchRepositoryImpl): SearchRepository =
+    fun providePixabayRepository(searchRepository: PixabayRepositoryImpl): PixabayRepository =
         searchRepository
 }

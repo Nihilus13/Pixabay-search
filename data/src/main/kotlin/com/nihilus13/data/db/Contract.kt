@@ -22,7 +22,6 @@ internal object Contract {
     object SearchRecordTable {
         const val TABLE_NAME = "search_record_table"
 
-        const val SEARCH_RECORD_ID = "search_record_id"
         const val SEARCH_TEXT = "search_text"
         const val TOTAL = "total"
         const val TOTAL_HITS = "total_hits"

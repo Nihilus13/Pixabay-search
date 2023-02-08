@@ -15,8 +15,11 @@ internal interface HitDao {
                 "WHERE ${Contract.HitTable.HIT_ID} = :id " +
                 "LIMIT 1;"
     )
-    suspend fun getHit(id: String): HitEntity
+    suspend fun getHit(id: String): HitEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHits(hit: List<HitEntity>)
+    suspend fun insertHits(hits: List<HitEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHit(hit: HitEntity)
 }

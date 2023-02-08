@@ -17,7 +17,7 @@ internal interface SearchRecordWithHitsDao {
     suspend fun insert(searchRecord: SearchRecordEntity, hits: List<HitEntity>) {
         insertSearchRecord(searchRecord)
         insertHits(hits)
-        val crossRef = hits.map { SearchRecordHitCrossReference(searchRecord.id, it.id) }
+        val crossRef = hits.map { SearchRecordHitCrossReference(searchRecord.searchText, it.id) }
         insertSearchRecordWithHits(crossRef)
     }
 
@@ -37,5 +37,5 @@ internal interface SearchRecordWithHitsDao {
                 "WHERE ${Contract.SearchRecordTable.SEARCH_TEXT} = :searchText " +
                 "LIMIT 1;"
     )
-    suspend fun getSearchRecord(searchText: String): SearchRecordWithHits
+    suspend fun getSearchRecord(searchText: String): SearchRecordWithHits?
 }

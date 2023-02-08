@@ -1,6 +1,8 @@
 package com.nihilus13.pixabay.fragment.details
 
 import androidx.core.view.isVisible
+import com.nihilus13.domain.model.DetailsResult
+import com.nihilus13.domain.model.HitData
 import com.nihilus13.imageloader.ImageLoaderManager
 import com.nihilus13.pixabay.fragment.details.state.DetailsViewState
 import com.nihilus13.ui.databinding.PixabayDetailsFragmentBinding
@@ -26,34 +28,49 @@ internal class DetailsRenderer @Inject constructor(private val imageLoaderManage
     fun renderState(viewState: DetailsViewState) {
         when (viewState) {
             is DetailsViewState.Data -> renderData(viewState)
-            is DetailsViewState.Error -> renderError(viewState)
-            is DetailsViewState.Pending -> renderPending(viewState)
+            is DetailsViewState.Pending -> renderPending()
+            is DetailsViewState.Error -> renderNoData()
         }
     }
 
     private fun renderData(viewState: DetailsViewState.Data) {
-        binding.container.isVisible = true
-        binding.error.isVisible = false
-        binding.progressIndicator.isVisible = false
-        imageLoaderManager.loadImage(binding.image, viewState.result.largeImageURL)
         with(binding) {
-            usernameText.text = viewState.result.user
-            tagsText.text = viewState.result.tags.joinToString(", ")
-            commentsText.text = viewState.result.comments.toString()
-            likesText.text = viewState.result.likes.toString()
-            downloadsText.text = viewState.result.downloads.toString()
+            container.isVisible = true
+            error.isVisible = false
+            progressIndicator.isVisible = false
+        }
+        renderDetailsResult(viewState.result)
+    }
+
+    private fun renderDetailsResult(result: DetailsResult) = when (result) {
+        is DetailsResult.Data -> renderDataResult(result.data)
+        DetailsResult.NoData -> renderNoData()
+    }
+
+    private fun renderDataResult(data: HitData) {
+        imageLoaderManager.loadImage(binding.image, data.largeImageUrl)
+        with(binding) {
+            usernameText.text = data.user
+            tagsText.text = data.tags
+            commentsText.text = data.comments.toString()
+            likesText.text = data.likes.toString()
+            downloadsText.text = data.downloads.toString()
         }
     }
 
-    private fun renderError(viewState: DetailsViewState.Error) {
-        binding.container.isVisible = false
-        binding.error.isVisible = true
-        binding.progressIndicator.isVisible = false
+    private fun renderNoData() {
+        with(binding) {
+            container.isVisible = false
+            error.isVisible = true
+            progressIndicator.isVisible = false
+        }
     }
 
-    private fun renderPending(viewState: DetailsViewState.Pending) {
-        binding.container.isVisible = false
-        binding.error.isVisible = false
-        binding.progressIndicator.isVisible = true
+    private fun renderPending() {
+        with(binding) {
+            container.isVisible = false
+            error.isVisible = false
+            progressIndicator.isVisible = true
+        }
     }
 }

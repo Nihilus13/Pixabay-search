@@ -5,6 +5,7 @@ import android.content.Context
 import com.nihilus13.data.di.DatabaseModule
 import com.nihilus13.data.di.NetworkModule
 import com.nihilus13.data.di.RepositoryModule
+import com.nihilus13.data.di.UtilsModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -12,6 +13,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        UtilsModule::class,
         NetworkModule::class,
         DatabaseModule::class,
         RepositoryModule::class]

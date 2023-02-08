@@ -6,7 +6,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
 import com.nihilus13.data.TestDataProvider.HIT_ID
-import com.nihilus13.data.TestDataProvider.hitEntity1
+import com.nihilus13.data.TestDataProvider.hitEntity
 import com.nihilus13.data.db.PixabayDatabase
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterAll
@@ -27,7 +27,7 @@ internal class HitDaoTest {
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    runBlocking { hitDao.insertHits(listOf(hitEntity1)) }
+                    runBlocking { hitDao.insertHits(listOf(hitEntity)) }
                 }
             }).build()
 

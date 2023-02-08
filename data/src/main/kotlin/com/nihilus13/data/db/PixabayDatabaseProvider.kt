@@ -3,7 +3,7 @@ package com.nihilus13.data.db
 import android.content.Context
 import androidx.room.Room
 
-internal object DbProvider {
+internal object PixabayDatabaseProvider {
 
     private const val DB_NAME = "pixabay_db"
 
