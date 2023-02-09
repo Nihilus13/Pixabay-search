@@ -88,7 +88,7 @@ internal class SearchRenderer @Inject constructor(private val imageLoaderManager
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onSearchRecyclerItemClick(detailId)
             }
-            .setNegativeButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+            .setNegativeButton(android.R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .show()
     }
 

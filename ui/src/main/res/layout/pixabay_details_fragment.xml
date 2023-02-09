@@ -10,7 +10,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:context="com.nihilus13.pixabay.activity.PixabayMainActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -36,9 +36,10 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_small"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/tagsText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/guideLineVerticalHalf"
             tools:text="Username" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_small"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toTopOf="@+id/likesText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/usernameText"
@@ -60,6 +62,7 @@
             android:gravity="center"
             android:padding="@dimen/margin_small"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toTopOf="@+id/refreshButton"
             app:layout_constraintEnd_toStartOf="@id/commentsText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tagsText"
@@ -73,9 +76,10 @@
             android:gravity="center"
             android:padding="@dimen/margin_small"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toBottomOf="@id/likesText"
             app:layout_constraintEnd_toStartOf="@id/downloadsText"
             app:layout_constraintStart_toEndOf="@id/likesText"
-            app:layout_constraintTop_toBottomOf="@id/tagsText"
+            app:layout_constraintTop_toTopOf="@id/likesText"
             tools:text="comments" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -86,10 +90,22 @@
             android:gravity="center"
             android:padding="@dimen/margin_small"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toBottomOf="@id/likesText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/commentsText"
-            app:layout_constraintTop_toBottomOf="@id/tagsText"
+            app:layout_constraintTop_toTopOf="@id/likesText"
             tools:text="downloads" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/refreshButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:gravity="center"
+            android:text="@string/app_refresh"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/likesText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
@@ -102,7 +118,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchButton" />
+        app:layout_constraintTop_toBottomOf="@id/searchButton"
+        tools:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/error"
@@ -115,4 +132,5 @@
         android:textColor="@android:color/holo_red_dark"
         android:visibility="gone"
         tools:text="Tags" />
+
 </FrameLayout>

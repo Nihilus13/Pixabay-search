@@ -33,6 +33,7 @@ internal class DetailsViewModel internal constructor(
     }
 
     private fun onInitialLoad() = viewModelScope.launch {
+        reduce { reducer.reducePending(_viewState.value!!) }
         val details = loadDetailsUseCase.loadDetails(_viewState.value!!.detailsId)
         reduce { reducer.reduceDetails(_viewState.value!!, details) }
     }

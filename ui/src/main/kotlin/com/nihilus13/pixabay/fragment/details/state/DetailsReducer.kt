@@ -5,6 +5,13 @@ import javax.inject.Inject
 
 internal class DetailsReducer @Inject constructor() {
 
+    fun reducePending(viewState: DetailsViewState): DetailsViewState =
+        when (viewState) {
+            is DetailsViewState.Data -> DetailsViewState.Pending(viewState.detailsId)
+            is DetailsViewState.Error -> DetailsViewState.Pending(viewState.detailsId)
+            is DetailsViewState.Pending -> viewState
+        }
+
     fun reduceDetails(viewState: DetailsViewState, details: DetailsResult): DetailsViewState =
         when (details) {
             DetailsResult.NoData -> DetailsViewState.Error(viewState.detailsId)

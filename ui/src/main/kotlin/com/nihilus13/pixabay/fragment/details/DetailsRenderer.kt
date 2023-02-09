@@ -20,9 +20,8 @@ internal class DetailsRenderer @Inject constructor(private val imageLoaderManage
         this.binding = binding
         this.onRefresh = onRefresh
 
-        this.binding.error.setOnClickListener {
-            onRefresh()
-        }
+        this.binding.refreshButton.setOnClickListener { onRefresh() }
+        this.binding.error.setOnClickListener { onRefresh() }
     }
 
     fun renderState(viewState: DetailsViewState) {
