@@ -79,7 +79,7 @@ internal class SearchViewModelTest {
                 listOf(
                     initialState,
                     initialState.copy(isPending = true),
-                    SearchSideEffect.SearchError,
+                    SearchSideEffect.NoData,
                     initialState
                 )
             )
@@ -149,7 +149,7 @@ internal class SearchViewModelTest {
                         searchText = searchText,
                         isPending = true
                     ),
-                    SearchSideEffect.SearchError,
+                    SearchSideEffect.NoData,
                     initialState.copy(searchText = searchText)
                 )
             )

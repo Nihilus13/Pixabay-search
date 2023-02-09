@@ -7,7 +7,7 @@ import com.nihilus13.data.TestDataProvider.hitEntity
 import com.nihilus13.data.TestDataProvider.searchRecord
 import com.nihilus13.data.TestDataProvider.searchRecordWithHits
 import com.nihilus13.data.date.DateSource
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
@@ -43,6 +43,6 @@ internal class DomainDatabaseMapperTest {
     fun `maps domain models to search record`() {
         val result = mapper.mapSearchRecord(searchRecordWithHits)
 
-        assertThat(result).isEqualTo(listOf(searchRecord))
+        assertThat(result).isEqualTo(searchRecord)
     }
 }

@@ -1,6 +1,5 @@
 package com.nihilus13.data.repository
 
-import android.accounts.NetworkErrorException
 import com.nihilus13.coroutines.safeapi.ContentResponse
 import com.nihilus13.data.TestDataProvider.HIT_ID
 import com.nihilus13.data.TestDataProvider.SEARCH_TEXT
@@ -11,14 +10,14 @@ import com.nihilus13.domain.model.SearchResult
 import com.nihilus13.domain.repository.source.CachedDataSource
 import com.nihilus13.domain.repository.source.RemoteDataSource
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Test
-import org.mockito.kotlin.given
+import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 internal class PixabayRepositoryImplTest {
 
-    private val exception = NetworkErrorException()
+    private val exception = RuntimeException()
     private val cachedDataSource: CachedDataSource = mock()
     private val remoteDataSource: RemoteDataSource = mock()
     private val pixabayRepository = PixabayRepositoryImpl(
@@ -28,8 +27,8 @@ internal class PixabayRepositoryImplTest {
 
     @Test
     fun `searches for images`() = runBlocking {
-        given { runBlocking { remoteDataSource.searchForImages(SEARCH_TEXT) } }
-            .willReturn(ContentResponse.Success(SearchResult.Data(searchRecord)))
+        whenever(remoteDataSource.searchForImages(SEARCH_TEXT))
+            .thenReturn(ContentResponse.Success(SearchResult.Data(searchRecord)))
 
         pixabayRepository.searchForImages(SEARCH_TEXT)
 
@@ -39,8 +38,8 @@ internal class PixabayRepositoryImplTest {
 
     @Test
     fun `searches for images with error`() = runBlocking {
-        given { runBlocking { remoteDataSource.searchForImages(SEARCH_TEXT) } }
-            .willReturn(ContentResponse.Failure(exception))
+        whenever(remoteDataSource.searchForImages(SEARCH_TEXT))
+            .thenReturn(ContentResponse.Failure(exception))
 
         pixabayRepository.searchForImages(SEARCH_TEXT)
 
@@ -49,8 +48,8 @@ internal class PixabayRepositoryImplTest {
 
     @Test
     fun `fetches details`() = runBlocking {
-        given { runBlocking { remoteDataSource.fetchDetails(HIT_ID) } }
-            .willReturn(ContentResponse.Success(DetailsResult.Data(hitData)))
+        whenever(remoteDataSource.fetchDetails(HIT_ID))
+            .thenReturn(ContentResponse.Success(DetailsResult.Data(hitData)))
 
         pixabayRepository.fetchDetails(HIT_ID)
 
@@ -60,8 +59,8 @@ internal class PixabayRepositoryImplTest {
 
     @Test
     fun `fetches details with error`() = runBlocking {
-        given { runBlocking { remoteDataSource.fetchDetails(HIT_ID) } }
-            .willReturn(ContentResponse.Failure(exception))
+        whenever(remoteDataSource.fetchDetails(HIT_ID))
+            .thenReturn(ContentResponse.Failure(exception))
 
         pixabayRepository.fetchDetails(HIT_ID)
 

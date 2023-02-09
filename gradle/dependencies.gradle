@@ -57,5 +57,5 @@ ext {
     mockitoKotlinVersion = "4.1.0"
     supportTestVersion = '1.2.0'
     testCorektxVersion = '1.2.0'
-    robolectricVersion = '4.2'
+    robolectricVersion = '4.9.2'
 }

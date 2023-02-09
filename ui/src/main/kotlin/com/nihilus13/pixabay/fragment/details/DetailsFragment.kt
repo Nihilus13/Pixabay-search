@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.nihilus13.data.di.component.DataComponentInjector.getDataComponent
 import com.nihilus13.pixabay.activity.di.PixabayComponentProvider
 import com.nihilus13.pixabay.common.StateObserver
 import com.nihilus13.pixabay.fragment.details.state.DetailsAction
@@ -37,11 +38,13 @@ internal class DetailsFragment : Fragment(R.layout.pixabay_details_fragment),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        PixabayComponentProvider
-            .getPixabayComponent(requireActivity().applicationContext)
-            .detailsComponent()
-            .create(args.detailsId)
-            .inject(this)
+        with(requireActivity().applicationContext) {
+            PixabayComponentProvider
+                .getPixabayComponent(this, getDataComponent(this))
+                .detailsComponent()
+                .create(args.detailsId)
+                .inject(this@DetailsFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

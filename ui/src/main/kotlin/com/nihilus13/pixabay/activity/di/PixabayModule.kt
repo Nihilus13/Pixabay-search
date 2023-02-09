@@ -19,14 +19,17 @@ internal interface PixabayModule {
     @Binds
     @IntoMap
     @ViewModelKey(PixabayViewModel::class)
+    @ActivityScope
     fun provideViewModel(viewModel: PixabayViewModel): ViewModel
 
     companion object {
 
         @Provides
+        @ActivityScope
         fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
         @Provides
+        @ActivityScope
         fun provideImageLoader(context: Context): ImageLoaderManager =
             createImageLoaderManager(context)
     }

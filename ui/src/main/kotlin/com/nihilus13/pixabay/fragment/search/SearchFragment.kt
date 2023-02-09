@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.nihilus13.data.di.component.DataComponentInjector
 import com.nihilus13.pixabay.activity.di.PixabayComponentProvider
 import com.nihilus13.pixabay.common.StateObserver
 import com.nihilus13.pixabay.fragment.search.state.SearchAction
@@ -37,11 +38,13 @@ internal class SearchFragment : Fragment(R.layout.pixabay_search_fragment),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        PixabayComponentProvider
-            .getPixabayComponent(requireActivity().applicationContext)
-            .searchComponent()
-            .create()
-            .inject(this)
+        with(requireActivity().applicationContext) {
+            PixabayComponentProvider
+                .getPixabayComponent(this, DataComponentInjector.getDataComponent(this))
+                .searchComponent()
+                .create()
+                .inject(this@SearchFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,15 +75,16 @@ internal class SearchFragment : Fragment(R.layout.pixabay_search_fragment),
         when (sideEffect) {
             SearchSideEffect.BlankSearchText -> showBlankSearchWarning()
             is SearchSideEffect.ProceedToDetails -> navigateToDetails(sideEffect.detailsId)
-            SearchSideEffect.SearchError -> showSearchError()
+            SearchSideEffect.NoData -> showNoDataInfo()
         }
     }
 
     private fun showBlankSearchWarning() =
-        Toast.makeText(requireContext(), R.string.app_search_blank_text_warning, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), R.string.app_search_blank_text_warning, Toast.LENGTH_SHORT)
+            .show()
 
-    private fun showSearchError() =
-        Toast.makeText(requireContext(), R.string.app_search_error, Toast.LENGTH_SHORT).show()
+    private fun showNoDataInfo() =
+        Toast.makeText(requireContext(), R.string.app_details_no_data, Toast.LENGTH_SHORT).show()
 
     private fun navigateToDetails(searchId: String) {
         val direction = SearchFragmentDirections.navigateToDetailsFragment(searchId)

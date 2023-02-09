@@ -7,9 +7,15 @@ import javax.inject.Inject
 
 internal class PixabayInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val builder = chain.request().newBuilder()
-        builder.addHeader(HEADER_API_KEY, BuildConfig.API_KEY)
-        return chain.proceed(builder.build())
+        val request = chain.request()
+
+        val url = request.url.newBuilder()
+            .addQueryParameter(HEADER_API_KEY, BuildConfig.API_KEY)
+            .build()
+
+        val requestBuilder = request.newBuilder().url(url)
+
+        return chain.proceed(requestBuilder.build())
     }
 
     private companion object {

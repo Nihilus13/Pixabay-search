@@ -2,6 +2,7 @@ package com.nihilus13.pixabay.injection.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.nihilus13.pixabay.activity.di.ActivityScope
 import com.nihilus13.pixabay.injection.ViewModelFactory
 import dagger.Binds
 import dagger.MapKey
@@ -12,6 +13,7 @@ import kotlin.reflect.KClass
 interface ViewModelBuilderModule {
 
     @Binds
+    @ActivityScope
     fun bindViewModeFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 }
 

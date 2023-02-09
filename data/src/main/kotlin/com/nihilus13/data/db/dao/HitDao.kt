@@ -12,7 +12,7 @@ internal interface HitDao {
 
     @Query(
         "SELECT * FROM ${Contract.HitTable.TABLE_NAME} " +
-                "WHERE ${Contract.HitTable.HIT_ID} = :id " +
+                "WHERE ${Contract.HitTable.HIT_ID} == :id " +
                 "LIMIT 1;"
     )
     suspend fun getHit(id: String): HitEntity?

@@ -6,10 +6,10 @@ import retrofit2.http.Query
 
 internal interface SearchService {
 
-    @GET
+    @GET("api/")
     suspend fun searchImages(@Query(QUERY_SEARCH_TEXT) searchText: String): SearchResponse
 
-    @GET
+    @GET("api/")
     suspend fun refreshImage(@Query(QUERY_DETAILS_ID) hitId: String): SearchResponse
 
     private companion object {

@@ -2,7 +2,7 @@ package com.nihilus13.data.date
 
 import com.google.common.truth.Truth.assertThat
 import com.nihilus13.data.TestDataProvider.CREATED_AT_TIMESTAMP
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import java.util.Calendar

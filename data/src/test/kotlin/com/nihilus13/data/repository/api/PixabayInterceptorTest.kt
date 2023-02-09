@@ -6,8 +6,9 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
 
 internal class PixabayInterceptorTest {
 
@@ -17,7 +18,7 @@ internal class PixabayInterceptorTest {
         get() = Request.Builder().url(mockWebServer.url("")).build()
     private lateinit var okHttpClient: OkHttpClient
 
-    @BeforeAll
+    @Before
     fun setup() {
         mockWebServer.start()
         mockWebServer.enqueue(MockResponse())
@@ -28,8 +29,13 @@ internal class PixabayInterceptorTest {
     fun `checks whether pixabay api key header has been added`() {
         okHttpClient.newCall(request).execute()
         val request = mockWebServer.takeRequest()
+        val param = request.requestUrl?.queryParameter(HEADER_API_KEY)
+        assertThat(param).isEqualTo(BuildConfig.API_KEY)
+    }
 
-        assertThat(request.headers).contains(HEADER_API_KEY to BuildConfig.API_KEY)
+    @After
+    fun teardown() {
+        mockWebServer.close()
     }
 
     private companion object {

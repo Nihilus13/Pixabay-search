@@ -1,16 +1,16 @@
 package com.nihilus13.pixabay.fragment.details.state
 
-import com.nihilus13.domain.usecase.LoadDetailsResult
+import com.nihilus13.domain.model.DetailsResult
 import javax.inject.Inject
 
 internal class DetailsReducer @Inject constructor() {
 
-    fun reduceDetails(viewState: DetailsViewState, details: LoadDetailsResult): DetailsViewState =
+    fun reduceDetails(viewState: DetailsViewState, details: DetailsResult): DetailsViewState =
         when (details) {
-            LoadDetailsResult.Error -> DetailsViewState.Error(viewState.detailsId)
-            is LoadDetailsResult.Success -> DetailsViewState.Data(
+            DetailsResult.NoData -> DetailsViewState.Error(viewState.detailsId)
+            is DetailsResult.Data -> DetailsViewState.Data(
                 detailsId = viewState.detailsId,
-                result = details.result
+                result = details
             )
         }
 }

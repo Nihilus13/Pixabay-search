@@ -52,7 +52,7 @@ internal class SearchViewModel internal constructor(
         reduce { reducer.reducePending(_viewState.value!!) }
         val result = searchUseCase.searchForImages(searchText)
         if (result is SearchResult.NoData) {
-            sideEffect.value = SearchSideEffect.SearchError
+            sideEffect.value = SearchSideEffect.NoData
         }
         reduce { reducer.reduceResult(_viewState.value!!, result) }
     }

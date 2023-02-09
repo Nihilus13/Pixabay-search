@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
-
 apply from: "$rootDir/gradle/common.gradle"
 apply from: "$rootDir/gradle/dagger.gradle"
 apply from: "$rootDir/gradle/db.gradle"
 
 android {
     defaultConfig {
-        buildConfigField("String", "API_URL", "\"https://pixabay.com/api/\"")
+        buildConfigField("String", "API_URL", "\"https://pixabay.com/\"")
         buildConfigField("String", "API_KEY", "\"33267739-6939a15bdde527737b71c5b3d\"")
     }
 }

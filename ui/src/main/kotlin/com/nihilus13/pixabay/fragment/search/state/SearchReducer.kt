@@ -12,7 +12,7 @@ internal class SearchReducer @Inject constructor() {
 
     fun reduceResult(viewState: SearchViewState, result: SearchResult): SearchViewState =
         when (result) {
-            SearchResult.NoData -> viewState
+            SearchResult.NoData -> viewState.copy(isPending = false)
             is SearchResult.Data -> viewState.copy(
                 results = result.record.hits.map(),
                 isPending = false
