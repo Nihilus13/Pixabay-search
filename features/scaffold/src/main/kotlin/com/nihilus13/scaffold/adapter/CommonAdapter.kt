@@ -12,7 +12,7 @@ class CommonAdapter(private val setViewHolderBinders: Set<DelegateType>) :
 
     private val asyncDiff = AsyncListDiffer(this, CommonDiffItemCallback())
 
-    private var list: List<RecyclerItem>
+    var list: List<RecyclerItem>
         get() = asyncDiff.currentList
         set(value) = asyncDiff.submitList(value)
 

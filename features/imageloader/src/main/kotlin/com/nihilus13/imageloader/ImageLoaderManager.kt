@@ -4,9 +4,5 @@ import android.widget.ImageView
 
 interface ImageLoaderManager {
 
-    fun loadImage(
-        imageView: ImageView,
-        imageUrl: String,
-        transformationType: TransformationType? = null
-    )
+    fun loadImage(imageView: ImageView, imageUrl: String)
 }

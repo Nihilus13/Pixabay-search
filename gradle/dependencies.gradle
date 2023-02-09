@@ -32,8 +32,8 @@ ext {
     okhttpVersion = "4.9.3"
     kotlinCoroutineVersion = "1.6.4"
     kotlinTestCoroutineVersion = "1.4.3"
-    coilVersion = "0.9.5"
-    coilSvgVersion = "0.9.5"
+    coilVersion = "2.2.2"
+    coilSvgVersion = "2.2.2"
 
     detektVersion = "1.22.0"
 

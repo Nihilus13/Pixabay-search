@@ -79,6 +79,7 @@ internal class SearchRenderer @Inject constructor(private val imageLoaderManager
             setOnClickListener { onSearchClick(viewState.searchText) }
         }
         bindSearchEdit(viewState.searchText)
+        commonAdapter.list = viewState.results
     }
 
     private fun showConfirmationDialog(detailId: String) {
