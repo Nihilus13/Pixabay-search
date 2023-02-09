@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import com.nihilus13.data.TestDataProvider.HIT_ID
 import com.nihilus13.data.TestDataProvider.hitEntity
+import com.nihilus13.data.TestDataProvider.hitEntity2
 import com.nihilus13.data.db.PixabayDatabase
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -30,8 +31,19 @@ internal class HitDaoTest {
     }
 
     @Test
+    fun `fetches hits with given id`() = runBlocking {
+        database.clearAllTables()
+        dao.insertHits(listOf(hitEntity, hitEntity2))
+
+        val hit = dao.getHits()
+
+        assertThat(hit).isEqualTo(listOf(hitEntity, hitEntity2))
+    }
+
+    @Test
     fun `fetches hit with given id`() = runBlocking {
-        dao.insertHits(listOf(hitEntity))
+        database.clearAllTables()
+        dao.insertHit(hitEntity)
 
         val hit = dao.getHit(HIT_ID)
 

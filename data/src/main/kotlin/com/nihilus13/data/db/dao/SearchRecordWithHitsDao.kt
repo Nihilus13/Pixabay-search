@@ -6,35 +6,24 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.nihilus13.data.db.Contract
-import com.nihilus13.data.db.entity.HitEntity
 import com.nihilus13.data.db.entity.SearchRecordEntity
-import com.nihilus13.data.db.entity.SearchRecordHitCrossReference
+import com.nihilus13.data.db.entity.SearchRecordHitEntity
 import com.nihilus13.data.db.entity.SearchRecordWithHits
 
 @Dao
 internal interface SearchRecordWithHitsDao {
 
-    suspend fun insert(searchRecord: SearchRecordEntity, hits: List<HitEntity>) {
-        insertSearchRecord(searchRecord)
-        insertHits(hits)
-        val crossRef = hits.map { SearchRecordHitCrossReference(searchRecord.searchText, it.id) }
-        insertSearchRecordWithHits(crossRef)
-    }
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSearchRecord(searchRecord: SearchRecordEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertHits(hit: List<HitEntity>)
-
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSearchRecordWithHits(records: List<SearchRecordHitCrossReference>)
+    suspend fun insertSearchRecordWithHits(records: List<SearchRecordHitEntity>)
 
     @Transaction
     @Query(
         "SELECT * FROM ${Contract.SearchRecordTable.TABLE_NAME} " +
-                "WHERE ${Contract.SearchRecordTable.SEARCH_TEXT} = :searchText " +
+                "WHERE ${Contract.SearchRecordTable.SEARCH_TEXT} == :searchText COLLATE NOCASE " +
                 "LIMIT 1;"
     )
     suspend fun getSearchRecord(searchText: String): SearchRecordWithHits?

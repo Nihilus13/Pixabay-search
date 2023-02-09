@@ -2,6 +2,7 @@ package com.nihilus13.data.repository.source
 
 import com.nihilus13.data.db.dao.HitDao
 import com.nihilus13.data.db.dao.SearchRecordWithHitsDao
+import com.nihilus13.data.db.entity.SearchRecordHitEntity
 import com.nihilus13.data.repository.mapper.DomainDatabaseMapper
 import com.nihilus13.domain.model.DetailsResult
 import com.nihilus13.domain.model.HitData
@@ -17,8 +18,13 @@ internal class CachedDataSourceImpl @Inject constructor(
 ) : CachedDataSource {
 
     override suspend fun insertHitData(data: SearchRecord) {
-        val result = mapper.mapHitData(data.hits)
-        hitDao.insertHits(result)
+        val result = mapper.mapHitSearchRecord(data)
+        hitDao.insertHits(result.hits)
+        with(searchRecordWithHitsDao) {
+            insertSearchRecord(result.searchRecord)
+            result.hits.map { SearchRecordHitEntity(result.searchRecord.searchText, it.id) }
+                .let { insertSearchRecordWithHits(it) }
+        }
     }
 
     override suspend fun insertHitData(data: HitData) {
@@ -28,7 +34,6 @@ internal class CachedDataSourceImpl @Inject constructor(
 
     override suspend fun searchForImages(searchText: String): SearchResult {
         val result = searchRecordWithHitsDao.getSearchRecord(searchText)
-
         return if (result != null) {
             val searchRecord = mapper.mapSearchRecord(result)
             SearchResult.Data(searchRecord)
@@ -37,7 +42,7 @@ internal class CachedDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getDetailedImage(hitId: String): DetailsResult {
+    override suspend fun getDetailedHit(hitId: String): DetailsResult {
         val result = hitDao.getHit(hitId)
         return if (result != null) {
             val hitData = mapper.mapHitEntity(result)

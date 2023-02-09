@@ -17,6 +17,9 @@ internal interface HitDao {
     )
     suspend fun getHit(id: String): HitEntity?
 
+    @Query("SELECT * FROM ${Contract.HitTable.TABLE_NAME};")
+    suspend fun getHits(): List<HitEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHits(hits: List<HitEntity>)
 

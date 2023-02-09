@@ -5,9 +5,10 @@ Pixabay search concept
 - [Overview](#overview)
 - [Architecture](#architecture)
 - [3rd party libraries](#3rd-party-libraries)
+- [Snapshot tests](#snapshot-tests)
 - [Known issues](#known-issues)
 
-<img src=" height="500">
+<img src="pixabay.gif" height="500">
 
 ## Overview
 
@@ -16,7 +17,7 @@ Applications searches images in pixabay
 ### Features
 
 + Fetching results of search via Pixabay API
-+ Displaying different positions from my resume
++ Displaying details of Pixabay search
 
 ## Architecture
 
@@ -36,16 +37,21 @@ contain any business logic.
 ### Data
 
 Main business logic lives in the `data` module. `Data` is responsible for downloading data
-from `Repository` and combine them with network status.
-`Repository` is implemented with two data sources. In memory cache and remote, for fetching data
-from network. Remote data source is responsible for work with `ApiService` - Retrofit interface to
-define network calls.
+from `PixabayRepository` and combine them with network status.
+`PixabayRepository` is implemented with two data sources. In memory cache and remote, for fetching
+data from network. Remote data source is responsible for work with `SearchService` - Retrofit
+interface to define network calls.
 
 ### Coroutines
 
-Coroutines is used to perform simple api calls defined in through `Repository`.
+Coroutines is used to perform simple api calls defined in through `PixabayRepository`.
 
 ### View
+
+Thanks to Android Data Binding mechanism `Activity` or `Fragment` acts as a Dummy View. It does not
+contain any presentation or render logic. `View` is only responsible for getting an instance
+of `ViewState` and render it in `Render` classes. List of images is implement with usage of adapter
+delegate pattern.
 
 ### ViewModel
 
@@ -60,3 +66,13 @@ automatically translated to UI via renderer classes
 - Coil (Image loading).
 - Coroutines (For async stuff)
 - Android View Binding
+
+## Snapshot tests
+
+- View snapshot tests need to be run in particular type of emulator to record and compare screen
+  captures. It has been implemented with usage of karumi shot library.
+
+## Known issues
+
+- Missing simple CircleCI integration for showing
+- Lack of jacoco configuration to show coverage report of repository.

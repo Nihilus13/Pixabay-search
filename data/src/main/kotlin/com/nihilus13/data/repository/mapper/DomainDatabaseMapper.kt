@@ -2,6 +2,7 @@ package com.nihilus13.data.repository.mapper
 
 import com.nihilus13.data.date.DateSource
 import com.nihilus13.data.db.entity.HitEntity
+import com.nihilus13.data.db.entity.SearchRecordEntity
 import com.nihilus13.data.db.entity.SearchRecordWithHits
 import com.nihilus13.domain.model.HitData
 import com.nihilus13.domain.model.SearchRecord
@@ -11,6 +12,21 @@ internal class DomainDatabaseMapper @Inject constructor(private val dateSource: 
 
     fun mapHitEntity(hits: HitEntity): HitData =
         mapHitEntitiesInternal(listOf(hits)).first()
+
+    fun mapHitSearchRecord(searchRecord: SearchRecord): SearchRecordWithHits {
+        val createdAtTimestamp = dateSource.getCurrentDateTimestamp()
+        val searchRecordEntity = SearchRecordEntity(
+            searchText = searchRecord.searchText,
+            createdAt = createdAtTimestamp,
+            total = searchRecord.total,
+            totalHits = searchRecord.totalHits
+        )
+        val hits = searchRecord.hits.map { it.map(createdAtTimestamp) }
+        return SearchRecordWithHits(
+            searchRecord = searchRecordEntity,
+            hits = hits
+        )
+    }
 
     fun mapHitEntities(hits: List<HitEntity>): List<HitData> =
         mapHitEntitiesInternal(hits)

@@ -20,6 +20,7 @@ internal class PixabayRepositoryImplTest {
     private val exception = RuntimeException()
     private val cachedDataSource: CachedDataSource = mock()
     private val remoteDataSource: RemoteDataSource = mock()
+
     private val pixabayRepository = PixabayRepositoryImpl(
         cachedDataSource = cachedDataSource,
         remoteDataSource = remoteDataSource
@@ -54,7 +55,7 @@ internal class PixabayRepositoryImplTest {
         pixabayRepository.fetchDetails(HIT_ID)
 
         verify(cachedDataSource).insertHitData(searchRecord)
-        verify(cachedDataSource).getDetailedImage(SEARCH_TEXT)
+        verify(cachedDataSource).getDetailedHit(SEARCH_TEXT)
     }
 
     @Test
@@ -64,6 +65,6 @@ internal class PixabayRepositoryImplTest {
 
         pixabayRepository.fetchDetails(HIT_ID)
 
-        verify(cachedDataSource).getDetailedImage(SEARCH_TEXT)
+        verify(cachedDataSource).getDetailedHit(SEARCH_TEXT)
     }
 }

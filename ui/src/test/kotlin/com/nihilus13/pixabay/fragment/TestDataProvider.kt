@@ -12,13 +12,17 @@ internal object TestDataProvider {
     private const val HIT_LONG_ID = 1L
     private const val HIT_ID = HIT_LONG_ID.toString()
     private const val TOTAL = 1L
+    private const val URL =
+        "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png"
+    private const val TAGS = "awesome, beauty, sun"
+    private const val USER = "Hugo"
 
     val hitData = HitData(
         id = HIT_ID,
-        thumbnailUrl = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
-        largeImageUrl = "https://toppng.com/uploads/preview/sheep-png-images-11553734775mqnnvg1xw7.png",
-        tags = "awesome, beauty, sun",
-        user = "Hugo",
+        thumbnailUrl = URL,
+        largeImageUrl = URL,
+        tags = TAGS,
+        user = USER,
         likes = 5L,
         downloads = 3L,
         comments = 10L

@@ -49,6 +49,7 @@ internal class DetailsViewModelTest {
             assertThat(states).isEqualTo(
                 listOf(
                     initialState,
+                    initialState,
                     DetailsViewState.Data(
                         detailsId = DETAILS_ID,
                         result = detailsResult
@@ -68,6 +69,7 @@ internal class DetailsViewModelTest {
 
             assertThat(states).isEqualTo(
                 listOf(
+                    initialState,
                     initialState,
                     DetailsViewState.Error(detailsId = DETAILS_ID)
                 )

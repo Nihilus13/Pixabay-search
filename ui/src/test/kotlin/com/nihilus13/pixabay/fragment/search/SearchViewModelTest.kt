@@ -22,9 +22,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
 
-@ExtendWith(
-    value = [CoroutineExtension::class, InstantTaskExecutorExtension::class]
-)
+@ExtendWith(value = [CoroutineExtension::class, InstantTaskExecutorExtension::class])
 internal class SearchViewModelTest {
 
     private val initialState = SearchViewState(
@@ -71,7 +69,7 @@ internal class SearchViewModelTest {
             given(runBlocking { searchUseCaseMock.searchForImages(initialState.searchText) })
                 .willReturn(searchResultNoData)
             val viewModel = viewModel()
-            val states = viewModel.viewState.observeValues()
+            val states = observeValues(viewModel.viewState, viewModel.sideEffect)
 
             viewModel.sendAction(SearchAction.InitialSearch)
 
@@ -110,7 +108,7 @@ internal class SearchViewModelTest {
         @Test
         fun `searches for result`() {
             val searchText = "sheep"
-            given(runBlocking { searchUseCaseMock.searchForImages(initialState.searchText) })
+            given(runBlocking { searchUseCaseMock.searchForImages(searchText) })
                 .willReturn(searchResult)
             val viewModel = viewModel(initialState.copy(searchText = searchText))
             val states = viewModel.viewState.observeValues()
@@ -135,10 +133,10 @@ internal class SearchViewModelTest {
         @Test
         fun `searches for result with error`() {
             val searchText = "sheep"
-            given(runBlocking { searchUseCaseMock.searchForImages(initialState.searchText) })
+            given(runBlocking { searchUseCaseMock.searchForImages(searchText) })
                 .willReturn(searchResultNoData)
             val viewModel = viewModel(initialState.copy(searchText = searchText))
-            val states = viewModel.viewState.observeValues()
+            val states = observeValues(viewModel.viewState, viewModel.sideEffect)
 
             viewModel.sendAction(SearchAction.Search(searchText))
 

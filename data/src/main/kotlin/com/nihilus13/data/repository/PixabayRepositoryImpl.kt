@@ -27,7 +27,7 @@ internal class PixabayRepositoryImpl @Inject constructor(
 
     override suspend fun fetchDetails(hitId: String): DetailsResult =
         when (val result = remoteDataSource.fetchDetails(hitId)) {
-            is ContentResponse.Failure -> cachedDataSource.getDetailedImage(hitId)
+            is ContentResponse.Failure -> cachedDataSource.getDetailedHit(hitId)
             is ContentResponse.Success -> result.getData()
                 .also { insertHitData(it.data) }
         }

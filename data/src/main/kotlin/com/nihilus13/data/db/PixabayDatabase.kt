@@ -7,13 +7,13 @@ import com.nihilus13.data.db.dao.HitDao
 import com.nihilus13.data.db.dao.SearchRecordWithHitsDao
 import com.nihilus13.data.db.entity.HitEntity
 import com.nihilus13.data.db.entity.SearchRecordEntity
-import com.nihilus13.data.db.entity.SearchRecordHitCrossReference
+import com.nihilus13.data.db.entity.SearchRecordHitEntity
 
 @Database(
     entities = [
         SearchRecordEntity::class,
         HitEntity::class,
-        SearchRecordHitCrossReference::class
+        SearchRecordHitEntity::class
     ],
     version = DB_VERSION,
     exportSchema = false

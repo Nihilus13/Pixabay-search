@@ -2,7 +2,7 @@ ext {
     getVersionNumber = {
         return Integer.parseInt('git rev-list master --count'.execute().text.trim() ?: "1")
     }
-    appId = "com.nihilus13"
+    appId = "com.nihilus13.pixabay"
 
     minVersion = 22
     targetVersion = 33
@@ -29,7 +29,7 @@ ext {
     daggerVersion = "2.44"
     gsonVersion = "2.8.5"
     retrofitVersion = "2.9.0"
-    okhttpVersion = "4.9.3"
+    okhttpVersion = "4.10.0"
     kotlinCoroutineVersion = "1.6.4"
     kotlinTestCoroutineVersion = "1.4.3"
     coilVersion = "2.2.2"

@@ -76,7 +76,10 @@ internal class SearchRenderer @Inject constructor(private val imageLoaderManager
         }
         with(binding.searchButton) {
             isEnabled = !viewState.isPending || viewState.searchText.isNotBlank()
-            setOnClickListener { onSearchClick(viewState.searchText) }
+            setOnClickListener {
+                onSearchClick(viewState.searchText)
+                it.hideKeyboard()
+            }
         }
         bindSearchEdit(viewState.searchText)
         commonAdapter.list = viewState.results

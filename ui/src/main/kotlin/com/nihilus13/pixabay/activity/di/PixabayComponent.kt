@@ -8,7 +8,6 @@ import com.nihilus13.pixabay.fragment.search.di.SearchComponent
 import com.nihilus13.pixabay.injection.di.ViewModelBuilderModule
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Scope
 
 @ActivityScope
 @Component(
@@ -34,7 +33,3 @@ internal interface PixabayComponent {
 
     fun inject(activity: PixabayMainActivity)
 }
-
-@Scope
-@Retention(AnnotationRetention.SOURCE)
-annotation class ActivityScope

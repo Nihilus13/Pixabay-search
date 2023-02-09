@@ -12,9 +12,12 @@ android {
         viewBinding true
     }
     defaultConfig {
-        applicationId "${appId}.pixabay"
+        applicationId = "$appId"
 
         testInstrumentationRunner "org.karumi.shot.ShotTestRunner"
+    }
+    shot {
+        applicationId = "$appId"
     }
 }
 

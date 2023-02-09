@@ -15,5 +15,5 @@ interface CachedDataSource {
     suspend fun insertHitData(data: SearchRecord)
     suspend fun insertHitData(data: HitData)
     suspend fun searchForImages(searchText: String): SearchResult
-    suspend fun getDetailedImage(hitId: String): DetailsResult
+    suspend fun getDetailedHit(hitId: String): DetailsResult
 }
