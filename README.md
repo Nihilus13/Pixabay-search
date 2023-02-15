@@ -21,7 +21,7 @@ Applications searches images in pixabay
 
 ## Architecture
 
-Simple MMVM/MVI
+Simple MVVM/MVI
 
 ### Packaging
 
