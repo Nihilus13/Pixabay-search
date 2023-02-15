@@ -48,9 +48,7 @@ Coroutines is used to perform simple api calls defined in through `PixabayReposi
 
 ### View
 
-Thanks to Android Data Binding mechanism `Activity` or `Fragment` acts as a Dummy View. It does not
-contain any presentation or render logic. `View` is only responsible for getting an instance
-of `ViewState` and render it in `Render` classes. List of images is implement with usage of adapter
+`Activity` or `Fragment` observes instance of `ViewState` and render it in `Render` classes. List of images is implement with usage of adapter
 delegate pattern.
 
 ### ViewModel
